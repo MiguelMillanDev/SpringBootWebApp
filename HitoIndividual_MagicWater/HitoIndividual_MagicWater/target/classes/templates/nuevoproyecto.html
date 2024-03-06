@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Proyecto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        input[type="submit"] {
+            background-color:#007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color:#007bff;
+        }
+    </style>
+
+</head>
+<body>
+<h1>Nuevo Proyecto</h1>
+<form action="/trabajador/proyecto/nuevo/guardar" method="post">
+    <label for="nombre">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" required><br>
+    <label for="descripcion">Descripción:</label><br>
+    <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea><br>
+    <label for="zona">Zona:</label><br>
+    <input type="text" id="zona" name="zona" required><br>
+    <label for="fecha">Fecha:</label><br>
+    <input type="date" id="fecha" name="fecha" required><br><br>
+    <input type="submit" value="Guardar">
+</form>
+<script>
+    function validateForm() {
+        var nombre = document.getElementById('nombre').value;
+        var descripcion = document.getElementById('descripcion').value;
+        var zona = document.getElementById('zona').value;
+        var fecha = document.getElementById('fecha').value;
+        var valid = true;
+
+        if (nombre.trim() === '') {
+            document.getElementById('nombre-error').innerText = 'Por favor, ingrese el nombre del proyecto.';
+            valid = false;
+        } else {
+            document.getElementById('nombre-error').innerText = '';
+        }
+
+        if (descripcion.trim() === '') {
+            document.getElementById('descripcion-error').innerText = 'Por favor, ingrese la descripción del proyecto.';
+            valid = false;
+        } else {
+            document.getElementById('descripcion-error').innerText = '';
+        }
+
+        if (zona.trim() === '') {
+            document.getElementById('zona-error').innerText = 'Por favor, ingrese la zona del proyecto.';
+            valid = false;
+        } else {
+            document.getElementById('zona-error').innerText = '';
+        }
+
+        if (fecha.trim() === '') {
+            document.getElementById('fecha-error').innerText = 'Por favor, seleccione la fecha del proyecto.';
+            valid = false;
+        } else {
+            document.getElementById('fecha-error').innerText = '';
+        }
+
+        return valid;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign in</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" integrity="sha384-oOE/3m0LUMPub4kaC09mrdEhIc+e3exm4xOGxAmuFXhBNF4hcg/6MiAXAf5p0P56" crossorigin="anonymous"/>
+</head>
+<style>
+    img {
+        display: block;
+        margin: 0 auto; /* Centra la imagen horizontalmente */
+        margin-bottom: 20px;
+        width: auto;
+        height: 150px;
+        border-radius: 10px; /* Añade bordes redondeados */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade sombra */
+    }
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .form-signin {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .form-signin .form-signin-heading {
+        margin-bottom: 30px;
+        text-align: center;
+        color: #007bff;
+    }
+
+    .form-signin img {
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        width: auto;
+        height: 150px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-signin label {
+        font-weight: normal;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-signin input[type="text"],
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+    }
+
+    .form-signin button {
+        font-size: 16px;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-top: 20px;
+    }
+
+    .form-signin button:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+</style>
+
+<body>
+<div class="container">
+    <form class="form-signin" method="post" action="/login">
+        <h2 class="form-signin-heading">Inicie sesión, por favor</h2>
+        <img src="imagenes/magicwater.png">
+        <p>
+            <label for="username" class="sr-only">Usuario:</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Introduce tu NIF" required autofocus>
+        </p>
+        <p>
+            <label for="password" class="sr-only">Contraseña:</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Introduce tu contraseña" required>
+        </p>
+        <input name="_csrf" type="hidden" value="XKn1lOd3607Lo6gxxL3l7gezWN03e7P3zkvoQ4SywQkd-BRIa5nB8YMV2nrmlpAD8JDRizKLdb8OHovarS2NdbTTo2p5yHV4" />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+    </form>
+</div>
+</body></html>

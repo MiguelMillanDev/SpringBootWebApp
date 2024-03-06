@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        h2 a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+<h2>
+    <a href="/">Página Principal</a>
+    <a th:if="${!(user==null)}" href="/contra">Cambiar la contraseña</a>
+</h2>
+<form th:if="${!(user==null)}" th:action="@{/guardarperfil}" th:object="${user}" method="post">
+    <fieldset>
+        <legend>Edita tu perfil</legend>
+        <!-- Atributos que no queremos que el usuario edite pero tampoco deseamos que regresen vacíos al controlador -->
+        <input type="hidden" th:field="*{nif}">
+        <input type="hidden" th:field="*{password}">
+        <input type="hidden" th:field="*{activo}">
+        <input type="hidden" th:field="*{permiso}">
+        <p>
+            <label for="nombre">Nombre:</label>
+            <input type="text" th:field="*{nombre}" id="nombre" required>
+        </p>
+        <p>
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" th:field="*{apellidos}" id="apellidos" required>
+        </p>
+        <p>
+            <label for="categoria">Categoría:</label>
+            <input type="text" th:field="*{categoria}" id="categoria" required>
+        </p>
+        <p>
+            <label for="email">Dirección de email:</label>
+            <input type="email" th:field="*{email}" id="email" required>
+        </p>
+        <p>
+            <label for="tlf">Teléfono:</label>
+            <input type="text" th:field="*{tlf}" id="tlf" required>
+        </p>
+        <p>
+            <input type="submit" value="Guardar cambios">
+        </p>
+    </fieldset>
+</form>
+</body>
+</html>

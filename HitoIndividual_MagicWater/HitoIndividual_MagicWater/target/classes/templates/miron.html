@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Supervisor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 36px;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        h2 {
+            color: #666;
+            font-size: 24px;
+            margin-top: 30px;
+        }
+
+        p {
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .cerrar-sesion {
+            margin-top: 30px;
+        }
+
+        .cerrar-sesion a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            font-size: 16px;
+            border: 1px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            background-color: #fff;
+        }
+
+        .cerrar-sesion a:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+    </style>
+
+</head>
+<body>
+<h1>Supervisor</h1>
+<th:block th:each="proyecto : ${proyectos}">
+    <h2>Proyecto: <span th:text="${proyecto.getNombre()}"></span></h2>
+    <p th:text="${proyecto.getDescripcion()}"></p>
+    <table>
+        <tr>
+            <th>Titulo</th>
+            <th>Inicio previsto</th>
+            <th>Fin previsto</th>
+            <th>Estado</th>
+            <th>A cargo de</th>
+        </tr>
+        <tr th:each="tarea : ${proyecto.getTareas()}">
+            <td th:text="${tarea.getTitulo()}"></td>
+            <td th:text="${tarea.getInicioprevisto()}"></td>
+            <td th:text="${tarea.getFinprevisto()}"></td>
+            <td th:text="${tarea.getEstado()}"></td>
+            <td th:text="${tarea.getUsuario().getNombre() + ' ' + tarea.getUsuario().getApellidos()}"></td>
+        </tr>
+    </table>
+</th:block>
+<div class="cerrar-sesion">
+    <p th:if="${!(login == null)}">
+        <a th:href="@{/logout}">Cerrar sesión</a>
+    </p>
+</div>
+</body>
+</html>

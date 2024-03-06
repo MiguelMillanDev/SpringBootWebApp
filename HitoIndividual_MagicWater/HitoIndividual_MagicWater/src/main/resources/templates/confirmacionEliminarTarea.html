@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmación de eliminación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .confirmation-btns {
+            text-align: center;
+        }
+
+        .btn {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Confirmación de eliminación</h2>
+    <p>¿Estás seguro de que deseas eliminar esta tarea?</p>
+    <div class="confirmation-btns">
+        <!-- Utiliza la sintaxis de Thymeleaf para pasar dinámicamente el ID de la tarea -->
+        <a th:href="@{'/trabajador/tarea/eliminar/confirmar/' + ${id}}" class="btn">Confirmar</a>
+        <a href="/" class="btn">Cancelar</a>
+    </div>
+</div>
+</body>
+</html>

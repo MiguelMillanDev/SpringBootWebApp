@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cambio de Contraseña</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        h2 a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        form {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="password"] {
+            width: calc(100% - 10px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="button"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        input[type="button"]:hover {
+            background-color: #555;
+        }
+
+        #error {
+            color: red;
+            text-align: center;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+<h2>
+    <a href="/">Página Principal</a>
+</h2>
+<h2 id="error">Las contraseñas no coinciden</h2>
+<form th:action="@{/guardarcontra}" method="post" id="formulario">
+    <fieldset><legend>Establece la nueva contraseña</legend>
+        <p>
+            <label for="pw1">Nueva contraseña: </label>
+            <input type="password" name="pw1" id="pw1" required>
+        </p>
+        <p>
+            <label for="pw2">Vuelva a introducir la contraseña: </label>
+            <input type="password" name="pw2" id="pw2" required>
+        </p>
+        <p>
+            <input type="button" value="Guardar nueva contraseña" onclick="validar()">
+        </p>
+    </fieldset>
+</form>
+
+<script>
+    function validar() {
+        let pw1 = document.getElementById("pw1").value;
+        let pw2 = document.getElementById("pw2").value;
+        if (pw1 === pw2) {
+            document.getElementById("formulario").submit();
+        } else {
+            document.getElementById("error").style.visibility = "visible";
+        }
+    }
+</script>
+</body>
+</html>

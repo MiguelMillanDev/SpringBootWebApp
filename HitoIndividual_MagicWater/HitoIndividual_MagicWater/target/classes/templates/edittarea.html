@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar tarea</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        form:hover {
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            width: calc(100% - 10px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            border-color: #007bff;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+</head>
+<body>
+<form th:action="@{/trabajador/tarea/editar/guardar}" method="post">
+    <fieldset>
+        <legend>Edita la tarea</legend>
+        <input type="hidden" th:value="${tarea.idtarea}" name="id">
+        <p>
+            <label for="titulo">Titulo: </label>
+            <input type="text" th:value="${tarea.titulo}" id="titulo" name="titulo">
+        </p>
+        <p>
+            <label for="descripcion">Descripción: </label>
+            <input type="text" th:value="${tarea.descripcion}" id="descripcion" name="descripcion">
+        </p>
+        <p>
+            <label for="estado">Estado: </label>
+            <select th:value="${tarea.estado}" id="estado" name="estado">
+                <option value="Pendiente">Pendiente</option>
+                <option value="En curso">En curso</option>
+                <option value="Terminada">Terminada</option>
+            </select>
+        </p>
+        <p>
+            <label for="inicioprevisto">Inicio previsto: </label>
+            <input type="date" th:value="${tarea.inicioprevisto}" id="inicioprevisto" name="inicioprevisto">
+        </p>
+        <p>
+            <label for="finprevisto">Fin previsto: </label>
+            <input type="date" th:value="${tarea.finprevisto}" id="finprevisto" name="finprevisto">
+        </p>
+        <p>
+            <label for="inicioreal">Inicio real: </label>
+            <input type="date" th:value="${tarea.inicioreal}" id="inicioreal" name="inicioreal">
+        </p>
+        <p>
+            <label for="finreal">Fin real: </label>
+            <input type="date" th:value="${tarea.finreal}" id="finreal" name="finreal">
+        </p>
+        <p>
+            <input type="submit" value="Guardar cambios">
+        </p>
+    </fieldset>
+</form>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var form = document.querySelector("form");
+        var estado = document.getElementById("estado");
+
+        form.addEventListener("submit", function(event) {
+            var titulo = document.getElementById("titulo").value.trim();
+            var descripcion = document.getElementById("descripcion").value.trim();
+            var inicioPrevisto = document.getElementById("inicioprevisto").value;
+            var finPrevisto = document.getElementById("finprevisto").value;
+            var inicioReal = document.getElementById("inicioreal").value;
+            var finReal = document.getElementById("finreal").value;
+            var estadoValue = estado.value;
+
+            // Validación de campos obligatorios
+            if (titulo === "" || descripcion === "" || inicioPrevisto === "" || finPrevisto === "") {
+                alert("Todos los campos son obligatorios.");
+                event.preventDefault(); // Evitar envío del formulario
+                return;
+            }
+
+            // Validación de fechas previstas
+            if (inicioPrevisto > finPrevisto) {
+                alert("La fecha de inicio previsto no puede ser posterior a la fecha de finalización prevista.");
+                event.preventDefault();
+                return;
+            }
+
+            // Validación de fechas reales si están presentes
+            if (inicioReal && finReal && inicioReal > finReal) {
+                alert("La fecha de inicio real no puede ser posterior a la fecha de finalización real.");
+                event.preventDefault();
+                return;
+            }
+
+            // Validación de estado "Terminado"
+            if (estadoValue === "Terminada") {
+                alert("No se pueden realizar cambios en una tarea que está marcada como 'Terminada'.");
+                event.preventDefault();
+                return;
+            }
+        });
+    });
+
+</script>
+
+</html>

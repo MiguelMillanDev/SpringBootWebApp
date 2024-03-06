@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic Water</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+        img {
+            display: block;
+            margin: 0 auto; /* Centra la imagen horizontalmente */
+            width: auto;
+            height: 150px;
+            border-radius: 10px; /* Añade bordes redondeados */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade sombra */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 50%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            margin: 10px auto;
+            width: 20%;
+            background-color: #007bff;
+            border: 1px solid #4d4d4d;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.1);
+        }
+
+        a:hover {
+            background-color: #c3cfff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Magic Water</h1>
+    <img src="imagenes/magicwater.png">
+
+    <table th:if="${!(login == null)}">
+        <tr>
+            <th>NIF</th>
+            <td th:text="${login.getNif()}"></td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td th:text="${login.getNombre()}"></td>
+        </tr>
+        <tr>
+            <th>Apellidos</th>
+            <td th:text="${login.getApellidos()}"></td>
+        </tr>
+        <tr>
+            <th>Categoría</th>
+            <td th:text="${login.getCategoria()}"></td>
+        </tr>
+    </table>
+
+    <p th:if="${login == null}">
+        Usuario: sin inicio de sesión
+    </p>
+
+    <p>
+        <a th:if="${login == null}" th:href="@{/login}">Iniciar sesión</a>
+        <a th:if="${!(login == null)}" th:href="@{/logout}">Cerrar sesión</a>
+        <a th:if="${!(login==null)}" th:href="@{/perfil}">Perfil</a>
+    </p>
+
+    <h2><a href="/supervisor">Inspeccionar tareas (solo supervisores)</a></h2>
+    <h2><a href="/trabajador">Gestionar tareas (solo trabajadores)</a></h2>
+</body>
+</html>

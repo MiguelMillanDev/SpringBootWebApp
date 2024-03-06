@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Nueva Tarea</title>
+  <style>body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+  }
+
+  h2 {
+    color: #333;
+    text-align: center;
+  }
+
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  fieldset {
+    border: none;
+  }
+
+  legend {
+    font-weight: bold;
+    color: #333;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  </style>
+</head>
+<body>
+<h2>La nueva tarea será añadida al proyecto Tareas Sueltas</h2>
+<form th:action="@{/trabajador/tarea/nueva/guardar}" method="post" onsubmit="return validarFormulario()">
+  <fieldset><legend>Añade la nueva tarea</legend>
+    <p>
+      <label for="titulo">Titulo: </label>
+      <input type="text" th:value="${tarea.titulo}" id="titulo" name="titulo">
+    </p>
+    <p>
+      <label for="descripcion">Descripción: </label>
+      <input type="text" th:value="${tarea.descripcion}" id="descripcion" name="descripcion">
+    </p>
+    <p>
+      <label for="estado">Estado: </label>
+      <select th:value="${tarea.estado}" id="estado" name="estado">
+        <option value="Pendiente">Pendiente</option>
+        <option value="En curso">En curso</option>
+        <option value="Terminada">Terminada</option>
+      </select>
+    </p>
+    <p>
+      <label for="inicioprevisto">Inicio previsto: </label>
+      <input type="date" th:value="${tarea.inicioprevisto}" id="inicioprevisto" name="inicioprevisto">
+    </p>
+    <p>
+      <label for="finprevisto">Fin previsto: </label>
+      <input type="date" th:value="${tarea.finprevisto}" id="finprevisto" name="finprevisto">
+    </p>
+    <p>
+      <label for="inicioreal">Inicio real: </label>
+      <input type="date" th:value="${tarea.inicioreal}" id="inicioreal" name="inicioreal">
+    </p>
+    <p>
+      <label for="finreal">Fin real: </label>
+      <input type="date" th:value="${tarea.finreal}" id="finreal" name="finreal">
+    </p>
+    <p>
+      <input type="submit" value="Guardar cambios">
+    </p>
+  </fieldset>
+</form>
+
+<script>
+  function validarFormulario() {
+    var titulo = document.getElementById('titulo').value;
+    var descripcion = document.getElementById('descripcion').value;
+
+    // Validar que el título no esté vacío
+    if (titulo.trim() === '') {
+      alert('Por favor, introduce un título para la tarea.');
+      return false;
+    }
+
+    // Validar que la descripción no esté vacía
+    if (descripcion.trim() === '') {
+      alert('Por favor, introduce una descripción para la tarea.');
+      return false;
+    }
+
+    // Puedes agregar más validaciones según tus necesidades
+
+    return true; // Envía el formulario si todas las validaciones pasan
+  }
+</script>
+</body>
+</html>
